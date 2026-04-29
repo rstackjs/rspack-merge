@@ -1,0 +1,36 @@
+{
+  "name": "@rspack/merge",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rslib",
+    "dev": "rslib --watch",
+    "format": "prettier --write .",
+    "lint": "rslint",
+    "test": "rstest",
+    "test:watch": "rstest --watch"
+  },
+  "devDependencies": {
+    "@rslib/core": "^0.21.3",
+    "@rslint/core": "^0.4.2",
+    "@rspack/core": "^2.0.1",
+    "@rstest/adapter-rslib": "^0.2.2",
+    "@rstest/core": "^0.9.8",
+    "@types/node": "^20.19.39",
+    "prettier": "^3.8.2",
+    "typescript": "^6.0.3"
+  },
+  "private": true
+}
