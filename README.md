@@ -20,6 +20,9 @@ $ pnpm add -D rspack-merge
 
 # bun
 $ bun add -D rspack-merge
+```
+
+## Usage
 
 ### **`merge(...configuration | [...configuration])`**
 
