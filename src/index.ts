@@ -7,7 +7,12 @@ import {
   ICustomizeOptions,
   Key,
 } from './types';
-import { isPlainObject, isSameCondition, isUndefined } from './utils';
+import {
+  isPlainObject,
+  isSameCondition,
+  isUndefined,
+  isPromiseLike,
+} from './utils';
 import wildcard from './wildcard';
 
 function merge<Configuration extends object>(
@@ -31,8 +36,7 @@ function mergeWithCustomize<Configuration extends object>(
       throw new TypeError('Merging undefined is not supported');
     }
 
-    // @ts-ignore
-    if (firstConfiguration.then) {
+    if (isPromiseLike(firstConfiguration)) {
       throw new TypeError('Promises are not supported');
     }
 
@@ -52,8 +56,7 @@ function mergeWithCustomize<Configuration extends object>(
           throw new TypeError('Merging undefined is not supported');
         }
 
-        // @ts-ignore
-        if (firstConfiguration[0].then) {
+        if (isPromiseLike(firstConfiguration[0])) {
           throw new TypeError('Promises are not supported');
         }
 

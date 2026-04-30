@@ -24,6 +24,14 @@ function isUndefined(value: unknown): value is undefined {
   return typeof value === 'undefined';
 }
 
+function isPromiseLike(value: unknown): value is PromiseLike<unknown> {
+  return (
+    value !== null &&
+    (typeof value === 'object' || typeof value === 'function') &&
+    typeof (value as any).then === 'function'
+  );
+}
+
 export function flatten<T, R>(target: T): R {
   const delimiter = '.';
   const output: Record<any, any> = {};
@@ -114,4 +122,10 @@ function isSameCondition(a, b) {
   return true;
 }
 
-export { isUndefined, isRegex, isPlainObject, isSameCondition };
+export {
+  isUndefined,
+  isRegex,
+  isPlainObject,
+  isSameCondition,
+  isPromiseLike,
+};
