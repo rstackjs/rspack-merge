@@ -1,6 +1,6 @@
-# @rspack/merge - Merge designed for Rspack
+# rspack-merge - Merge designed for Rspack
 
-**@rspack/merge** provides a `merge` function that concatenates arrays and merges objects creating a new object. If functions are encountered, it will execute them, run the results through the algorithm, and then wrap the returned values within a function again.
+**rspack-merge** provides a `merge` function that concatenates arrays and merges objects creating a new object. If functions are encountered, it will execute them, run the results through the algorithm, and then wrap the returned values within a function again.
 
 This behavior is particularly useful in configuring rspack although it has uses beyond it. Whenever you need to merge configuration objects, **webpack-merge** can come in handy.
 
@@ -9,7 +9,7 @@ This behavior is particularly useful in configuring rspack although it has uses 
 `merge` is the core, and the most important idea, of the API. Often this is all you need unless you want further customization.
 
 ```javascript
-import { merge } from '@rspack/merge';
+import { merge } from 'rspack-merge';
 
 // Default API
 const output = merge(object1, object2, object3, ...);
@@ -63,7 +63,7 @@ You can choose the configuration you want by using `rspack --mode development` a
 In case you need more flexibility, `merge` behavior can be customized per field as below:
 
 ```javascript
-import { mergeWithCustomize } from '@rspack/merge';
+import { mergeWithCustomize } from 'rspack-merge';
 
 const output = mergeWithCustomize(
   {
@@ -130,7 +130,7 @@ customizeObject({ object1: {} }, { object2: {} }, bar2);
 `customizeArray` and `customizeObject` provide small strategies to for `mergeWithCustomize`. They support `append`, `prepend`, `replace`, and wildcards for field names.
 
 ```javascript
-import { mergeWithCustomize, customizeArray, customizeObject } from '@rspack/merge';
+import { mergeWithCustomize, customizeArray, customizeObject } from 'rspack-merge';
 
 const output = mergeWithCustomize({
   customizeArray: customizeArray({
@@ -153,7 +153,7 @@ The first `<field>` is the config property to look through for duplicates.
 When the order of elements of the `<field>` in the first configuration differs from the order in the second configuration, the latter is preserved.
 
 ```javascript
-import { mergeWithCustomize, unique } from '@rspack/merge';
+import { mergeWithCustomize, unique } from 'rspack-merge';
 
 const output = mergeWithCustomize({
   customizeArray: unique(
@@ -253,11 +253,11 @@ The way it works is that you should annotate fields to match using `match` (or `
 
 ## Using with TypeScript
 
-**@rspack/merge** supports TypeScript out of the box. You should pass `Configuration` type from rspack to it as follows:
+**rspack-merge** supports TypeScript out of the box. You should pass `Configuration` type from rspack to it as follows:
 
 ```typescript
 import { Configuration } from "@rspack/core";
-import { merge } from "@rspack/merge";
+import { merge } from "rspack-merge";
 
 const config = merge<Configuration>({...}, {...});
 

@@ -1,7 +1,11 @@
 {
-  "name": "@rspack/merge",
+  "name": "rspack-merge",
   "version": "0.1.0",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rstackjs/rspack-merge.git"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
