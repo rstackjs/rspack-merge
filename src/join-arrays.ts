@@ -17,7 +17,7 @@ export default function joinArrays({
     const newKey = key ? `${key}.${k}` : k;
 
     if (typeof a === 'function' && typeof b === 'function') {
-      return (...args: any[]) => _joinArrays(a(...args), b(...args), k);
+      return (...args: unknown[]) => _joinArrays(a(...args), b(...args), k);
     }
 
     if (isArray(a) && isArray(b)) {

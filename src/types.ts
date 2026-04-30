@@ -1,6 +1,6 @@
 export type Key = string;
 
-export type Customize = (a, b, key: Key) => any;
+export type Customize = (a: unknown, b: unknown, key: Key) => unknown;
 
 export interface ICustomizeOptions {
   customizeArray?: Customize;

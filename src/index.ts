@@ -79,19 +79,19 @@ function mergeWithCustomize<Configuration extends object>(
 function customizeArray(rules: {
   [s: string]: CustomizeRule | CustomizeRuleString;
 }) {
-  return (a, b, key: Key) => {
+  return (a: unknown, b: unknown, key: Key) => {
     const matchedRule =
       Object.keys(rules).find((rule) => wildcard(rule, key)) || '';
 
     if (matchedRule) {
       switch (rules[matchedRule]) {
         case CustomizeRule.Prepend:
-          return [...b, ...a];
+          return [...(b as unknown[]), ...(a as unknown[])];
         case CustomizeRule.Replace:
           return b;
         case CustomizeRule.Append:
         default:
-          return [...a, ...b];
+          return [...(a as unknown[]), ...(b as unknown[])];
       }
     }
   };
@@ -102,22 +102,38 @@ type Rules = { [s: string]: CustomizeRule | CustomizeRuleString | Rules };
 function mergeWithRules(rules: Rules) {
   return mergeWithCustomize({
     customizeArray: (a, b, key: Key) => {
-      let currentRule: CustomizeRule | CustomizeRuleString | Rules = rules;
+      let currentRule: CustomizeRule | CustomizeRuleString | Rules | undefined =
+        rules;
 
       key.split('.').forEach((k) => {
-        if (!currentRule) {
+        if (!currentRule || typeof currentRule !== 'object') {
           return;
         }
 
-        currentRule = (currentRule as any)[k];
+        currentRule = (currentRule as Record<string, unknown>)[k] as
+          | CustomizeRule
+          | CustomizeRuleString
+          | Rules
+          | undefined;
       });
 
       if (isPlainObject(currentRule)) {
-        return mergeWithRule({ currentRule, a, b });
+        return mergeWithRule({
+          currentRule: currentRule as
+            | CustomizeRule
+            | CustomizeRuleString
+            | Rules,
+          a,
+          b,
+        });
       }
 
       if (typeof currentRule === 'string') {
-        return mergeIndividualRule({ currentRule, a, b });
+        return mergeIndividualRule({
+          currentRule,
+          a: a as Array<unknown>,
+          b: b as Array<unknown>,
+        });
       }
 
       return undefined;
@@ -133,41 +149,46 @@ function mergeWithRule({
   b,
 }: {
   currentRule: CustomizeRule | CustomizeRuleString | Rules;
-  a;
-  b;
+  a: unknown;
+  b: unknown;
 }) {
   if (!isArray(a)) {
     return a;
   }
 
-  const bAllMatches: any[] = [];
+  const bAllMatches: unknown[] = [];
   const ret = a.map((ao) => {
     if (!isPlainObject(currentRule)) {
       return ao;
     }
 
-    const ret = {};
+    const ret: Record<string, unknown> = {};
     const rulesToMatch: string[] = [];
-    const operations = {};
+    const operations: Record<string, unknown> = {};
     Object.entries(currentRule).forEach(([k, v]) => {
       if (v === CustomizeRule.Match) {
         rulesToMatch.push(k);
       } else {
-        (operations as any)[k] = v;
+        operations[k] = v;
       }
     });
 
-    const bMatches = b.filter((o) => {
-      const matches = rulesToMatch.every((rule) =>
-        isSameCondition(ao[rule], o[rule]),
-      );
+    const bMatches = (b as unknown[]).filter(
+      (o): o is Record<string, unknown> => {
+        const matches = rulesToMatch.every((rule) =>
+          isSameCondition(
+            (ao as Record<string, unknown>)[rule],
+            (o as Record<string, unknown>)[rule],
+          ),
+        );
 
-      if (matches) {
-        bAllMatches.push(o);
-      }
+        if (matches) {
+          bAllMatches.push(o);
+        }
 
-      return matches;
-    });
+        return matches;
+      },
+    );
 
     if (!isPlainObject(ao)) {
       return ao;
@@ -177,7 +198,7 @@ function mergeWithRule({
       const rule = currentRule;
 
       switch (currentRule[k]) {
-        case CustomizeRule.Match:
+        case CustomizeRule.Match: {
           ret[k] = v;
 
           Object.entries(rule).forEach(([k, v]) => {
@@ -190,7 +211,8 @@ function mergeWithRule({
             }
           });
           break;
-        case CustomizeRule.Append:
+        }
+        case CustomizeRule.Append: {
           if (!bMatches.length) {
             ret[k] = v;
 
@@ -205,7 +227,8 @@ function mergeWithRule({
 
           ret[k] = v.concat(appendValue);
           break;
-        case CustomizeRule.Merge:
+        }
+        case CustomizeRule.Merge: {
           if (!bMatches.length) {
             ret[k] = v;
 
@@ -218,10 +241,10 @@ function mergeWithRule({
             throw new TypeError('Trying to merge non-objects');
           }
 
-          // deep merge
-          ret[k] = merge(v, lastValue);
+          ret[k] = merge(v as object, lastValue as object);
           break;
-        case CustomizeRule.Prepend:
+        }
+        case CustomizeRule.Prepend: {
           if (!bMatches.length) {
             ret[k] = v;
 
@@ -236,15 +259,18 @@ function mergeWithRule({
 
           ret[k] = prependValue.concat(v);
           break;
+        }
         case CustomizeRule.Replace:
           ret[k] = bMatches.length > 0 ? last(bMatches)[k] : v;
           break;
-        default:
-          const currentRule = operations[k];
+        default: {
+          const currentRule = operations[k] as
+            | CustomizeRule
+            | CustomizeRuleString
+            | Rules;
 
-          // Use .flat(); starting from Node 12
           const b = bMatches
-            .map((o) => o[k])
+            .map((o) => (o as Record<string, unknown>)[k])
             .reduce(
               (acc, val) =>
                 isArray(acc) && isArray(val) ? [...acc, ...val] : acc,
@@ -253,13 +279,14 @@ function mergeWithRule({
 
           ret[k] = mergeWithRule({ currentRule, a: v, b });
           break;
+        }
       }
     });
 
     return ret;
   });
 
-  return ret.concat(b.filter((o) => !bAllMatches.includes(o)));
+  return ret.concat((b as unknown[]).filter((o) => !bAllMatches.includes(o)));
 }
 
 function mergeIndividualRule({
@@ -268,10 +295,9 @@ function mergeIndividualRule({
   b,
 }: {
   currentRule: CustomizeRule;
-  a: Array<any>;
-  b: Array<any>;
+  a: Array<unknown>;
+  b: Array<unknown>;
 }) {
-  // What if there's no match?
   switch (currentRule) {
     case CustomizeRule.Append:
       return a.concat(b);
@@ -284,7 +310,7 @@ function mergeIndividualRule({
   return a;
 }
 
-function last(arr) {
+function last<T>(arr: T[]): T {
   return arr[arr.length - 1];
 }
 
@@ -308,7 +334,6 @@ export {
   customizeObject,
   CustomizeRule,
   merge,
-  // This will show up as .default in CommonJS but for TS it's backwards-compatible
   merge as default,
   mergeWithCustomize,
   mergeWithRules,
