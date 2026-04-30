@@ -1,14 +1,14 @@
 function mergeUnique(
   key: string,
-  uniques: unknown[],
-  getter: (a: unknown) => string,
+  uniques: string[],
+  getter: (a: object) => string,
 ) {
-  const uniquesSet = new Set(uniques);
-  return (a: unknown[], b: unknown[], k: string) =>
+  let uniquesSet = new Set(uniques);
+  return (a: [], b: [], k: string) =>
     k === key &&
     Array.from(
       [...a, ...b]
-        .map((it) => ({ key: getter(it), value: it }))
+        .map((it: object) => ({ key: getter(it), value: it }))
         .map(({ key, value }) => ({
           key: uniquesSet.has(key) ? key : value,
           value: value,
