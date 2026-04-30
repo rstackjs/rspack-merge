@@ -1,11 +1,11 @@
 {
   "name": "rspack-merge",
   "version": "0.1.0",
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rstackjs/rspack-merge.git"
   },
+  "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -39,6 +39,5 @@
     "prettier": "^3.8.2",
     "terser-webpack-plugin": "^5.5.0",
     "typescript": "^6.0.3"
-  },
-  "private": true
+  }
 }
