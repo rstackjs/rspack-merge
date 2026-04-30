@@ -47,12 +47,14 @@ export default function joinArrays({
     }
 
     if (isPlainObject(b)) {
-      try {
-        return structuredClone(b);
-      } catch (error) {
-        console.error(error, '!!!!!!!!', b);
-        return b;
-      }
+      return mergeWith(
+        [{}, b],
+        joinArrays({
+          customizeArray,
+          customizeObject,
+          key: newKey,
+        }),
+      );
     }
 
     if (isArray(b)) {

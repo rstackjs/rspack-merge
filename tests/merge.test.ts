@@ -368,7 +368,7 @@ function normalMergeTest(merge, loadersKey) {
     },
   );
 
-  it.skip('should work with terser plugin', function () {
+  it('should work with terser plugin', function () {
     const commonConfig = {};
     const merged = merge(commonConfig, {
       mode: 'production',
@@ -411,7 +411,7 @@ function normalMergeTest(merge, loadersKey) {
       },
     });
 
-    expect(merged).toBeTruthy();
+    expect(merged).toMatchSnapshot();
   });
 }
 

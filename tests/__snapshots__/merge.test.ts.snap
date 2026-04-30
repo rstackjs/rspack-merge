@@ -1,0 +1,185 @@
+// Rstest Snapshot v1
+
+exports[`Merge > should work with terser plugin 1`] = `
+{
+  "devtool": false,
+  "mode": "production",
+  "optimization": {
+    "minimize": true,
+    "minimizer": [
+      TerserPlugin {
+        "options": {
+          "exclude": undefined,
+          "extractComments": false,
+          "include": undefined,
+          "minimizer": {
+            "implementation": [Function],
+            "options": {
+              "format": {
+                "comments": false,
+              },
+            },
+          },
+          "parallel": true,
+          "test": /\\\\\\.\\[cm\\]\\?js\\(\\\\\\?\\.\\*\\)\\?\\$/i,
+        },
+      },
+    ],
+    "splitChunks": {
+      "cacheGroups": {
+        "defaultVendors": false,
+        "vendors": {
+          "chunks": "all",
+          "name": [Function],
+          "test": /\\[\\\\\\\\/\\]node_modules\\[\\\\\\\\/\\]/,
+        },
+      },
+      "minSize": 0,
+    },
+  },
+  "stats": {
+    "assets": true,
+    "assetsSpace": 100,
+    "entrypoints": true,
+    "modules": false,
+  },
+}
+`;
+
+exports[`Merge > should work with terser plugin 2`] = `
+{
+  "devtool": false,
+  "mode": "production",
+  "optimization": {
+    "minimize": true,
+    "minimizer": [
+      TerserPlugin {
+        "options": {
+          "exclude": undefined,
+          "extractComments": false,
+          "include": undefined,
+          "minimizer": {
+            "implementation": [Function],
+            "options": {
+              "format": {
+                "comments": false,
+              },
+            },
+          },
+          "parallel": true,
+          "test": /\\\\\\.\\[cm\\]\\?js\\(\\\\\\?\\.\\*\\)\\?\\$/i,
+        },
+      },
+    ],
+    "splitChunks": {
+      "cacheGroups": {
+        "defaultVendors": false,
+        "vendors": {
+          "chunks": "all",
+          "name": [Function],
+          "test": /\\[\\\\\\\\/\\]node_modules\\[\\\\\\\\/\\]/,
+        },
+      },
+      "minSize": 0,
+    },
+  },
+  "stats": {
+    "assets": true,
+    "assetsSpace": 100,
+    "entrypoints": true,
+    "modules": false,
+  },
+}
+`;
+
+exports[`Merge > should work with terser plugin 3`] = `
+{
+  "devtool": false,
+  "mode": "production",
+  "optimization": {
+    "minimize": true,
+    "minimizer": [
+      TerserPlugin {
+        "options": {
+          "exclude": undefined,
+          "extractComments": false,
+          "include": undefined,
+          "minimizer": {
+            "implementation": [Function],
+            "options": {
+              "format": {
+                "comments": false,
+              },
+            },
+          },
+          "parallel": true,
+          "test": /\\\\\\.\\[cm\\]\\?js\\(\\\\\\?\\.\\*\\)\\?\\$/i,
+        },
+      },
+    ],
+    "splitChunks": {
+      "cacheGroups": {
+        "defaultVendors": false,
+        "vendors": {
+          "chunks": "all",
+          "name": [Function],
+          "test": /\\[\\\\\\\\/\\]node_modules\\[\\\\\\\\/\\]/,
+        },
+      },
+      "minSize": 0,
+    },
+  },
+  "stats": {
+    "assets": true,
+    "assetsSpace": 100,
+    "entrypoints": true,
+    "modules": false,
+  },
+}
+`;
+
+exports[`Merge > should work with terser plugin 4`] = `
+{
+  "devtool": false,
+  "mode": "production",
+  "optimization": {
+    "minimize": true,
+    "minimizer": [
+      TerserPlugin {
+        "options": {
+          "exclude": undefined,
+          "extractComments": false,
+          "include": undefined,
+          "minimizer": {
+            "implementation": [Function],
+            "options": {
+              "format": {
+                "comments": false,
+              },
+            },
+          },
+          "parallel": true,
+          "test": /\\\\\\.\\[cm\\]\\?js\\(\\\\\\?\\.\\*\\)\\?\\$/i,
+        },
+      },
+    ],
+    "splitChunks": {
+      "cacheGroups": {
+        "defaultVendors": false,
+        "vendors": {
+          "chunks": "all",
+          "name": [Function],
+          "test": /\\[\\\\\\\\/\\]node_modules\\[\\\\\\\\/\\]/,
+        },
+      },
+      "minSize": 0,
+    },
+  },
+  "stats": {
+    "assets": true,
+    "assetsSpace": 100,
+    "entrypoints": true,
+    "modules": false,
+  },
+}
+`;
