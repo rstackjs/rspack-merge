@@ -40,12 +40,14 @@ function mergeWithCustomize<Configuration extends object>(
       throw new TypeError('Promises are not supported');
     }
 
+    // No configuration at all
     if (!firstConfiguration) {
       return {} as Configuration;
     }
 
     if (configurations.length === 0) {
       if (Array.isArray(firstConfiguration)) {
+        // Empty array
         if (firstConfiguration.length === 0) {
           return {} as Configuration;
         }
@@ -99,7 +101,7 @@ type Rules = { [s: string]: CustomizeRule | CustomizeRuleString | Rules };
 
 function mergeWithRules(rules: Rules) {
   return mergeWithCustomize({
-    customizeArray: (a, b, key: Key) => {
+    customizeArray: (a, b, key: Key): undefined | unknown[] => {
       let currentRule: CustomizeRule | CustomizeRuleString | Rules | undefined =
         rules;
 
@@ -147,9 +149,9 @@ function mergeWithRule({
   b,
 }: {
   currentRule: CustomizeRule | CustomizeRuleString | Rules;
-  a: unknown;
-  b: unknown;
-}) {
+  a: unknown[];
+  b: unknown[];
+}): unknown[] {
   if (!isArray(a)) {
     return a;
   }
@@ -270,7 +272,7 @@ function mergeWithRule({
           const b = bMatches
             .map((o) => (o as Record<string, unknown>)[k])
             .reduce(
-              (acc, val) =>
+              (acc: unknown[], val): unknown[] =>
                 isArray(acc) && isArray(val) ? [...acc, ...val] : acc,
               [],
             );

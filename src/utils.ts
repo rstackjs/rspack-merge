@@ -2,7 +2,7 @@ function isRegex(o: unknown): o is RegExp {
   return o instanceof RegExp;
 }
 
-function isPlainObject(value: unknown) {
+function isPlainObject(value: unknown): value is object {
   if (Object.prototype.toString.call(value) !== '[object Object]') {
     return false;
   }

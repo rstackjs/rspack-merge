@@ -1,3 +1,5 @@
+/* rslint-disable @typescript-eslint/no-explicit-any */
+
 import { describe, it } from '@rstest/core';
 import assert from 'assert';
 import { rspack } from '@rspack/core';
@@ -9,7 +11,7 @@ describe('Unique', function () {
       customizeArray: unique(
         'plugins',
         ['HotModuleReplacementPlugin'],
-        (plugin) => plugin.constructor && plugin.constructor.name,
+        (plugin: any) => plugin.constructor && plugin.constructor.name,
       ),
     })(
       {
@@ -31,7 +33,7 @@ describe('Unique', function () {
       customizeArray: unique(
         'plugins',
         ['DefinePlugin'],
-        (plugin) => plugin.constructor && plugin.constructor.name,
+        (plugin: any) => plugin.constructor && plugin.constructor.name,
       ),
     })(
       {
@@ -65,7 +67,7 @@ describe('Unique', function () {
       customizeArray: unique(
         'plugins',
         ['HotModuleReplacementPlugin'],
-        (plugin) => plugin.constructor && plugin.constructor.name,
+        (plugin: any) => plugin.constructor && plugin.constructor.name,
       ),
     })(
       {
@@ -95,7 +97,7 @@ describe('Unique', function () {
       customizeArray: unique(
         'plugins',
         ['HotModuleReplacementPlugin'],
-        (plugin) => plugin.constructor && plugin.constructor.name,
+        (plugin: any) => plugin.constructor && plugin.constructor.name,
       ),
     })(
       {
@@ -125,7 +127,7 @@ describe('Unique', function () {
       customizeArray: unique(
         'plugins',
         ['DefinePlugin'],
-        (plugin) => plugin.constructor && plugin.constructor.name,
+        (plugin: any) => plugin.constructor && plugin.constructor.name,
       ),
     })(
       {

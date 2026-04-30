@@ -1,4 +1,9 @@
-import { Customize, Key } from './types';
+import {
+  CustomizeArray,
+  CustomizeObject,
+  ICustomizeOptions,
+  Key,
+} from './types';
 import mergeWith from './merge-with';
 import { isRegex, isPlainObject } from './utils';
 
@@ -8,9 +13,7 @@ export default function joinArrays({
   customizeArray,
   customizeObject,
   key,
-}: {
-  customizeArray?: Customize;
-  customizeObject?: Customize;
+}: ICustomizeOptions & {
   key?: Key;
 } = {}) {
   return function _joinArrays(a: unknown, b: unknown, k: Key) {
