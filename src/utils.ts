@@ -32,13 +32,13 @@ function isPromiseLike(value: unknown): value is PromiseLike<unknown> {
   );
 }
 
-export function flatten<T, R>(target: T): R {
+export function flatten<T extends object, R>(target: T): R {
   const delimiter = '.';
   const output: Record<string, unknown> = {};
 
-  function step(object, prev?) {
+  function step(object: object, prev?: string) {
     Object.keys(object).forEach(function (key) {
-      const value = object[key];
+      const value = (object as Record<string, unknown>)[key];
       const type = Object.prototype.toString.call(value);
 
       const newKey = prev ? prev + delimiter + key : key;
@@ -47,9 +47,9 @@ export function flatten<T, R>(target: T): R {
         !Array.isArray(value) &&
         !Buffer.isBuffer(value) &&
         isPlainObject(value) &&
-        Object.keys(value).length
+        Object.keys(value as object).length
       ) {
-        return step(value, newKey);
+        return step(value as object, newKey);
       }
 
       output[newKey] = value;
@@ -61,7 +61,18 @@ export function flatten<T, R>(target: T): R {
   return output as R;
 }
 
-function isSameCondition(a, b) {
+/**
+ * According to Webpack docs, a "test" should be the following:
+ *
+ * - A string
+ * - A RegExp
+ * - A function
+ * - An array of conditions (may be nested)
+ * - An object of conditions (may be nested)
+ *
+ * https://webpack.js.org/configuration/module/#condition
+ */
+function isSameCondition(a: unknown, b: unknown) {
   if (!a || !b) {
     return a === b;
   }
@@ -76,8 +87,8 @@ function isSameCondition(a, b) {
     return a.toString() === b.toString();
   }
 
-  const entriesA = Object.entries(flatten<unknown, object>(a));
-  const entriesB = Object.entries(flatten<unknown, object>(b));
+  const entriesA = Object.entries(flatten<object, object>(a as object));
+  const entriesB = Object.entries(flatten<object, object>(b as object));
   if (entriesA.length !== entriesB.length) {
     return false;
   }
@@ -111,10 +122,4 @@ function isSameCondition(a, b) {
   return true;
 }
 
-export {
-  isUndefined,
-  isRegex,
-  isPlainObject,
-  isSameCondition,
-  isPromiseLike,
-};
+export { isUndefined, isRegex, isPlainObject, isSameCondition, isPromiseLike };

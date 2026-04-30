@@ -40,14 +40,12 @@ function mergeWithCustomize<Configuration extends object>(
       throw new TypeError('Promises are not supported');
     }
 
-    // No configuration at all
     if (!firstConfiguration) {
       return {} as Configuration;
     }
 
     if (configurations.length === 0) {
       if (Array.isArray(firstConfiguration)) {
-        // Empty array
         if (firstConfiguration.length === 0) {
           return {} as Configuration;
         }
@@ -195,9 +193,9 @@ function mergeWithRule({
     }
 
     Object.entries(ao).forEach(([k, v]) => {
-      const rule = currentRule;
+      const rule = currentRule as Record<string, unknown>;
 
-      switch (currentRule[k]) {
+      switch (rule[k] as CustomizeRule) {
         case CustomizeRule.Match: {
           ret[k] = v;
 
@@ -264,10 +262,7 @@ function mergeWithRule({
           ret[k] = bMatches.length > 0 ? last(bMatches)[k] : v;
           break;
         default: {
-          const currentRule = operations[k] as
-            | CustomizeRule
-            | CustomizeRuleString
-            | Rules;
+          const currentRule = operations[k] as CustomizeRule | CustomizeRuleString | Rules;
 
           const b = bMatches
             .map((o) => (o as Record<string, unknown>)[k])
@@ -317,14 +312,14 @@ function last<T>(arr: T[]): T {
 function customizeObject(rules: {
   [s: string]: CustomizeRule | CustomizeRuleString;
 }) {
-  return (a, b, key: Key) => {
+  return (a: unknown, b: unknown, key: Key) => {
     switch (rules[key]) {
       case CustomizeRule.Prepend:
-        return mergeWith([b, a], joinArrays());
+        return mergeWith([b as object, a as object], joinArrays());
       case CustomizeRule.Replace:
         return b;
       case CustomizeRule.Append:
-        return mergeWith([a, b], joinArrays());
+        return mergeWith([a as object, b as object], joinArrays());
     }
   };
 }

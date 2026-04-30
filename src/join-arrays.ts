@@ -13,7 +13,7 @@ export default function joinArrays({
   customizeObject?: Customize;
   key?: Key;
 } = {}) {
-  return function _joinArrays(a, b, k: Key) {
+  return function _joinArrays(a: unknown, b: unknown, k: Key) {
     const newKey = key ? `${key}.${k}` : k;
 
     if (typeof a === 'function' && typeof b === 'function') {
@@ -36,7 +36,7 @@ export default function joinArrays({
       return (
         customResult ||
         mergeWith(
-          [a, b],
+          [a as object, b as object],
           joinArrays({
             customizeArray,
             customizeObject,
@@ -48,7 +48,7 @@ export default function joinArrays({
 
     if (isPlainObject(b)) {
       return mergeWith(
-        [{}, b],
+        [{}, b as object],
         joinArrays({
           customizeArray,
           customizeObject,

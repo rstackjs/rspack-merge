@@ -8,7 +8,6 @@
     "moduleResolution": "bundler",
     "useDefineForClassFields": true,
     "allowImportingTsExtensions": true,
-    "noImplicitAny": false,
     "types": ["node"]
   },
   "include": [],
