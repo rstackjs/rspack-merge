@@ -75,5 +75,6 @@ jobs:
 
       - name: Lint
         run: |
+          pnpm run build
           pnpm run prettier:ci
           pnpm run lint
