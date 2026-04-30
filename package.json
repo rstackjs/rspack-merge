@@ -16,9 +16,12 @@
   ],
   "scripts": {
     "build": "rslib",
-    "dev": "rslib --watch",
+    "bump": "npx bumpp",
+    "dev": "rslib -w",
     "format": "prettier --write .",
     "lint": "rslint",
+    "lint:write": "rslint --fix",
+    "prettier:ci": "prettier --check .",
     "test": "rstest",
     "test:watch": "rstest --watch"
   },

@@ -1,1 +1,1 @@
-export default ["preLoaders", "loaders", "postLoaders", "rules"];
+export default ['preLoaders', 'loaders', 'postLoaders', 'rules'];

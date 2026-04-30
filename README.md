@@ -114,8 +114,8 @@ and `object2` as:
 then `customizeArray` will be invoked for each property of `Array` type, i.e:
 
 ```javascript
-customizeArray(["object1"], ["object2"], "foo1");
-customizeArray(["object1"], ["object2"], "foo2");
+customizeArray(['object1'], ['object2'], 'foo1');
+customizeArray(['object1'], ['object2'], 'foo2');
 ```
 
 and `customizeObject` will be invoked for each property of `Object` type, i.e:
@@ -157,8 +157,8 @@ import { mergeWithCustomize, unique } from '@rspack/merge';
 
 const output = mergeWithCustomize({
   customizeArray: unique(
-    "plugins",
-    ["HotModuleReplacementPlugin"],
+    'plugins',
+    ['HotModuleReplacementPlugin'],
     (plugin) => plugin.constructor && plugin.constructor.name,
   ),
 })(
@@ -184,7 +184,7 @@ const a = {
     rules: [
       {
         test: /\.css$/,
-        use: [{ loader: "style-loader" }, { loader: "sass-loader" }],
+        use: [{ loader: 'style-loader' }, { loader: 'sass-loader' }],
       },
     ],
   },
@@ -196,7 +196,7 @@ const b = {
         test: /\.css$/,
         use: [
           {
-            loader: "style-loader",
+            loader: 'style-loader',
             options: {
               modules: true,
             },
@@ -213,12 +213,12 @@ const result = {
         test: /\.css$/,
         use: [
           {
-            loader: "style-loader",
+            loader: 'style-loader',
             options: {
               modules: true,
             },
           },
-          { loader: "sass-loader" },
+          { loader: 'sass-loader' },
         ],
       },
     ],
@@ -229,10 +229,10 @@ assert.deepStrictEqual(
   mergeWithRules({
     module: {
       rules: {
-        test: "match",
+        test: 'match',
         use: {
-          loader: "match",
-          options: "replace",
+          loader: 'match',
+          options: 'replace',
         },
       },
     },

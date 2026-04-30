@@ -262,7 +262,10 @@ function mergeWithRule({
           ret[k] = bMatches.length > 0 ? last(bMatches)[k] : v;
           break;
         default: {
-          const currentRule = operations[k] as CustomizeRule | CustomizeRuleString | Rules;
+          const currentRule = operations[k] as
+            | CustomizeRule
+            | CustomizeRuleString
+            | Rules;
 
           const b = bMatches
             .map((o) => (o as Record<string, unknown>)[k])
