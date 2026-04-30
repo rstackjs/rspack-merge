@@ -8,8 +8,16 @@
     "moduleResolution": "bundler",
     "useDefineForClassFields": true,
     "allowImportingTsExtensions": true,
-    "rootDir": "src",
+    "noImplicitAny": false,
     "types": ["node"]
   },
-  "include": ["src"]
+  "include": [],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.test.json"
+    }
+  ]
 }

@@ -30,6 +30,7 @@
     "@rstest/core": "^0.9.8",
     "@types/node": "^20.19.39",
     "prettier": "^3.8.2",
+    "terser-webpack-plugin": "^5.5.0",
     "typescript": "^6.0.3"
   },
   "private": true
