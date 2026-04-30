@@ -1,0 +1,79 @@
+name: Test
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on pull request events but only for the main branch
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test:
+    permissions:
+      contents: read
+
+    name: Test - ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    concurrency:
+      group: test-${{ matrix.os }}-${{ github.ref }}
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      - name: Install Pnpm
+        run: |
+          npm install -g corepack@latest
+          corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: 24.15.0
+          package-manager-cache: false
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Run Test
+        run: pnpm run test
+
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+
+      - name: Install Pnpm
+        run: |
+          npm install -g corepack@latest
+          corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+        with:
+          node-version: 24.15.0
+          package-manager-cache: false
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Lint
+        run: |
+          pnpm run prettier:ci
+          pnpm run lint
