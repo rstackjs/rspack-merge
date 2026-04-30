@@ -1,10 +1,16 @@
 export type Key = string;
 
-export type Customize = (a: unknown, b: unknown, key: Key) => unknown;
+export type CustomizeArray = (
+  a: unknown[],
+  b: unknown[],
+  key: Key,
+) => false | undefined | unknown[];
+
+export type CustomizeObject = (a: object, b: object, key: Key) => unknown;
 
 export interface ICustomizeOptions {
-  customizeArray?: Customize;
-  customizeObject?: Customize;
+  customizeArray?: CustomizeArray;
+  customizeObject?: CustomizeObject;
 }
 
 export enum CustomizeRule {
