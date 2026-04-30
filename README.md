@@ -4,7 +4,24 @@
 
 This behavior is particularly useful in configuring rspack although it has uses beyond it. Whenever you need to merge configuration objects, **webpack-merge** can come in handy.
 
-## **`merge(...configuration | [...configuration])`**
+## Installation
+
+Install `rspack-merge` by your favorite package manager:
+
+```bash
+# npm
+$ npm install -D rspack-merge
+
+# yarn
+$ yarn add -D rspack-merge
+
+# pnpm
+$ pnpm add -D rspack-merge
+
+# bun
+$ bun add -D rspack-merge
+
+### **`merge(...configuration | [...configuration])`**
 
 `merge` is the core, and the most important idea, of the API. Often this is all you need unless you want further customization.
 
@@ -27,7 +44,7 @@ console.log(output);
 // { color: "red", fruit: "strawberries"}
 ```
 
-### Limitations
+#### Limitations
 
 Note that `Promise`s are not supported! If you want to return a configuration wrapped within a `Promise`, `merge` inside one. Example: `Promise.resolve(merge({ ... }, { ... }))`.
 
@@ -58,7 +75,7 @@ export default defineConfig((env, args) => {
 
 You can choose the configuration you want by using `rspack --mode development` assuming you are using _@rspack/cli_.
 
-## **`mergeWithCustomize({ customizeArray, customizeObject })(...configuration | [...configuration])`**
+### **`mergeWithCustomize({ customizeArray, customizeObject })(...configuration | [...configuration])`**
 
 In case you need more flexibility, `merge` behavior can be customized per field as below:
 
@@ -125,7 +142,7 @@ customizeObject({ object1: {} }, { object2: {} }, bar1);
 customizeObject({ object1: {} }, { object2: {} }, bar2);
 ```
 
-## **`customizeArray`** and **`customizeObject`**
+### **`customizeArray`** and **`customizeObject`**
 
 `customizeArray` and `customizeObject` provide small strategies to for `mergeWithCustomize`. They support `append`, `prepend`, `replace`, and wildcards for field names.
 
@@ -174,7 +191,7 @@ const output = mergeWithCustomize({
 // going to be the last plugin instance.
 ```
 
-## **`mergeWithRules`**
+### **`mergeWithRules`**
 
 To support advanced merging needs (i.e. merging within loaders), `mergeWithRules` includes additional syntax that allows you to match fields and apply strategies to match. Consider the full example below:
 
@@ -251,7 +268,7 @@ The way it works is that you should annotate fields to match using `match` (or `
 - `replace` (`CustomizeRule.Replace`) - Replaces items
 - `merge` (`CustomizeRule.Merge`) - Merges objects (shallow merge)
 
-## Using with TypeScript
+### Using with TypeScript
 
 **rspack-merge** supports TypeScript out of the box. You should pass `Configuration` type from rspack to it as follows:
 
