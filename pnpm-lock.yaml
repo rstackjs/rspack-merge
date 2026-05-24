@@ -18,11 +18,11 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4(@swc/helpers@0.5.21)
       '@rstest/adapter-rslib':
-        specifier: ^0.10.1
-        version: 0.10.1(@rslib/core@0.21.5(typescript@6.0.3))(@rstest/core@0.10.1)(typescript@6.0.3)
+        specifier: ^0.10.2
+        version: 0.10.2(@rslib/core@0.21.5(typescript@6.0.3))(@rstest/core@0.10.2)(typescript@6.0.3)
       '@rstest/core':
-        specifier: ^0.10.1
-        version: 0.10.1
+        specifier: ^0.10.2
+        version: 0.10.2
       '@types/node':
         specifier: ^24.12.4
         version: 24.12.4
@@ -329,18 +329,18 @@ packages:
       '@swc/helpers':
         optional: true
 
-  '@rstest/adapter-rslib@0.10.1':
-    resolution: {integrity: sha512-ZMKnjvHHmBRUkQU4rJydpUTZ//Ww5VsUwADPjm78MJCh59TS4sFIaTXXtl9gV7fp0O2flfaENz6TmnDPB4sf2g==}
+  '@rstest/adapter-rslib@0.10.2':
+    resolution: {integrity: sha512-lAF+f/nUdZGcP3UB7vOS9PFWgzoVO0C08/8wUzs8o64q1ZeEFaY0lWyhuiRrXNdjLnH/Kf3igv4dLEBufEtH4A==}
     peerDependencies:
       '@rslib/core': '>=0.18.6'
-      '@rstest/core': ^0.10.1
+      '@rstest/core': ^0.10.2
       typescript: ^5 || ^6
     peerDependenciesMeta:
       typescript:
         optional: true
 
-  '@rstest/core@0.10.1':
-    resolution: {integrity: sha512-nHp14J6/OAkRFF2Eq0aB0jZNQ0atjJsYNsKSgs84E+fv8gl5mxRZgCa9h80z4LWWFNU+ZKNlPpJDzE4Qk1j+cg==}
+  '@rstest/core@0.10.2':
+    resolution: {integrity: sha512-2nadZIrCBJL8AicSLcU0O0G2wo98QXmlsy3yX4ShiLFDlfQAzPgZJYzR6ssqQhVCMx/dIIFifyNiYsGWWWsrXg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -945,14 +945,14 @@ snapshots:
     optionalDependencies:
       '@swc/helpers': 0.5.21
 
-  '@rstest/adapter-rslib@0.10.1(@rslib/core@0.21.5(typescript@6.0.3))(@rstest/core@0.10.1)(typescript@6.0.3)':
+  '@rstest/adapter-rslib@0.10.2(@rslib/core@0.21.5(typescript@6.0.3))(@rstest/core@0.10.2)(typescript@6.0.3)':
     dependencies:
       '@rslib/core': 0.21.5(typescript@6.0.3)
-      '@rstest/core': 0.10.1
+      '@rstest/core': 0.10.2
     optionalDependencies:
       typescript: 6.0.3
 
-  '@rstest/core@0.10.1':
+  '@rstest/core@0.10.2':
     dependencies:
       '@rsbuild/core': 2.0.6
       '@types/chai': 5.2.3
