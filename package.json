@@ -1,6 +1,6 @@
 {
   "name": "rspack-merge",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "packageManager": "pnpm@11.3.0",
   "repository": {
     "type": "git",
