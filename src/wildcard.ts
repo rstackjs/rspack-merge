@@ -19,7 +19,7 @@ class WildcardMatcher {
     if (part === '*') {
       return part;
     } else if (part.indexOf('*') >= 0 || part.indexOf('?') >= 0) {
-      return new RegExp(part.replace(REGEXP_PARTS, '\.$1'));
+      return new RegExp(part.replace(REGEXP_PARTS, '.$1'));
     }
     return part;
   }
@@ -57,6 +57,6 @@ export default function wildcard(
   test: string,
   separator?: RegExp,
 ): string[] | boolean {
-  const matcher = new WildcardMatcher(text, separator || /[\/\.]/);
+  const matcher = new WildcardMatcher(text, separator || /[/.]/);
   return matcher.match(test);
 }
