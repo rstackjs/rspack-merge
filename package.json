@@ -28,15 +28,15 @@
     "test:watch": "rstest --watch"
   },
   "devDependencies": {
-    "@rslib/core": "^0.22.1",
-    "@rslint/core": "^0.6.1",
-    "@rspack/core": "^2.0.8",
-    "@rstest/adapter-rslib": "^0.10.4",
-    "@rstest/core": "^0.10.4",
+    "@rslib/core": "^0.23.1",
+    "@rslint/core": "^0.6.4",
+    "@rspack/core": "^2.1.2",
+    "@rstest/adapter-rslib": "^0.10.6",
+    "@rstest/core": "^0.10.6",
     "@types/node": "^24.13.2",
-    "prettier": "^3.8.4",
+    "prettier": "^3.9.4",
     "terser-webpack-plugin": "^5.6.1",
     "typescript": "^6.0.3"
   },
-  "packageManager": "pnpm@11.6.0"
+  "packageManager": "pnpm@11.9.0"
 }
