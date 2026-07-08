@@ -111,18 +111,13 @@ function mergeWithRules(rules: Rules) {
         }
 
         currentRule = (currentRule as Record<string, unknown>)[k] as
-          | CustomizeRule
-          | CustomizeRuleString
-          | Rules
-          | undefined;
+          CustomizeRule | CustomizeRuleString | Rules | undefined;
       });
 
       if (isPlainObject(currentRule)) {
         return mergeWithRule({
           currentRule: currentRule as
-            | CustomizeRule
-            | CustomizeRuleString
-            | Rules,
+            CustomizeRule | CustomizeRuleString | Rules,
           a,
           b,
         });
@@ -265,9 +260,7 @@ function mergeWithRule({
           break;
         default: {
           const currentRule = operations[k] as
-            | CustomizeRule
-            | CustomizeRuleString
-            | Rules;
+            CustomizeRule | CustomizeRuleString | Rules;
 
           const b = bMatches
             .map((o) => (o as Record<string, unknown>)[k])

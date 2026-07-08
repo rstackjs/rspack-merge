@@ -22,8 +22,4 @@ export enum CustomizeRule {
 }
 
 export type CustomizeRuleString =
-  | 'match'
-  | 'merge'
-  | 'append'
-  | 'prepend'
-  | 'replace';
+  'match' | 'merge' | 'append' | 'prepend' | 'replace';
