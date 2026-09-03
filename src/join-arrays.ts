@@ -1,11 +1,11 @@
-import type {
+import {
   CustomizeArray,
   CustomizeObject,
   ICustomizeOptions,
   Key,
-} from './types.ts';
-import mergeWith from './merge-with.ts';
-import { isRegex, isPlainObject } from './utils.ts';
+} from './types';
+import mergeWith from './merge-with';
+import { isRegex, isPlainObject } from './utils';
 
 const isArray = Array.isArray;
 
