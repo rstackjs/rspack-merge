@@ -1,6 +1,6 @@
 /* rslint-disable @typescript-eslint/no-explicit-any */
 
-import { describe, it } from '@rstest/core';
+import { describe, it } from 'rstack/test';
 import assert from 'assert';
 import { rspack } from '@rspack/core';
 import { mergeWithCustomize, unique } from '../src';

@@ -71,8 +71,7 @@ jobs:
         with:
           run_install: true
 
-      - name: Lint
+      - name: Check
         run: |
           pnpm run build
-          pnpm run prettier:ci
-          pnpm run lint
+          pnpm run check

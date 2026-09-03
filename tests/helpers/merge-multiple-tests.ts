@@ -1,4 +1,4 @@
-import { it } from '@rstest/core';
+import { it } from 'rstack/test';
 import assert from 'assert';
 
 function multipleTests(merge) {

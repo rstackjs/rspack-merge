@@ -1,19 +1,19 @@
-import mergeWith from './merge-with';
-import joinArrays from './join-arrays';
-import unique from './unique';
+import mergeWith from './merge-with.ts';
+import joinArrays from './join-arrays.ts';
+import unique from './unique.ts';
 import {
   CustomizeRule,
-  CustomizeRuleString,
-  ICustomizeOptions,
-  Key,
-} from './types';
+  type CustomizeRuleString,
+  type ICustomizeOptions,
+  type Key,
+} from './types.ts';
 import {
   isPlainObject,
   isSameCondition,
   isUndefined,
   isPromiseLike,
-} from './utils';
-import wildcard from './wildcard';
+} from './utils.ts';
+import wildcard from './wildcard.ts';
 
 function merge<Configuration extends object>(
   firstConfiguration: Configuration | Configuration[],

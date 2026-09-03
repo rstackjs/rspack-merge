@@ -1,4 +1,4 @@
-import { describe, it } from '@rstest/core';
+import { describe, it } from 'rstack/test';
 import assert from 'assert';
 import { rspack } from '@rspack/core';
 import { mergeWithCustomize } from '../src';

@@ -13,13 +13,15 @@ export interface ICustomizeOptions {
   customizeObject?: CustomizeObject;
 }
 
-export enum CustomizeRule {
-  Match = 'match',
-  Merge = 'merge',
-  Append = 'append',
-  Prepend = 'prepend',
-  Replace = 'replace',
-}
+export const CustomizeRule = {
+  Match: 'match',
+  Merge: 'merge',
+  Append: 'append',
+  Prepend: 'prepend',
+  Replace: 'replace',
+} as const;
+
+export type CustomizeRule = (typeof CustomizeRule)[keyof typeof CustomizeRule];
 
 export type CustomizeRuleString =
   'match' | 'merge' | 'append' | 'prepend' | 'replace';
