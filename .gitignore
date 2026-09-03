@@ -12,6 +12,7 @@ doc_build/
 # IDE
 .vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json
 .idea
 
 *.tsbuildinfo
